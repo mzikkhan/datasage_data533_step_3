@@ -7,6 +7,8 @@ import os
 from typing import List, Optional, Dict, Set
 from langchain_core.documents import Document
 from datetime import datetime
+import logging
+
 
 from ..ingestion.chunker import TextChunker
 from ..ingestion.loaders import (
@@ -17,6 +19,32 @@ from ..ingestion.loaders import (
 )
 from .embedder import Embedder
 from .vector_store import VectorStore
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# User-defined Exceptions
+class IndexingException(Exception):
+    """Base exception for indexing operations."""
+    pass
+
+
+class FileValidationError(IndexingException):
+    """Raised when file validation fails."""
+    pass
+
+class LoaderError(IndexingException):
+    """Raised when document loading fails."""
+    pass
+
+class ChunkingError(IndexingException):
+    """Raised when document chunking fails."""
+    pass
+
+class StorageError(IndexingException):
+    """Raised when vector store operations fail."""
+    pass
+    
 
 
 class IndexingEngine:
@@ -30,7 +58,7 @@ class IndexingEngine:
     - System-wide statistics aggregation
     - Error handling and recovery
     """
-    
+
     def __init__(
         self,
         persist_dir: Optional[str] = "./datasage_store",
