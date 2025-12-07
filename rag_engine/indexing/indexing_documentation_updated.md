@@ -643,3 +643,10 @@ These features add significant value beyond the underlying libraries (LangChain,
 - **Business logic**: Validation, duplicate detection, error handling
 - **Orchestration**: Coordinating multiple components
 - **Analytics**: Monitoring usage patterns and performance
+
+Update on Tests for Step 3:
+- To run the tests, simply run run_coverage.py
+- To run the coverage report for the tests, run the following code (requires Coverage.py) from the rag_engine/indexing folder:
+```
+coverage run --include="embedder.py,vector_store.py,index_engine.py" -m unittest discover -s . -p "test_*.py" -v
+```
