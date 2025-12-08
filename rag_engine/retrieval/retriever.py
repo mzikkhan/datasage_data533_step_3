@@ -44,24 +44,18 @@ class OllamaEmbedder:
                 return result.get("embedding", [])
         except urllib.error.URLError as e:
             raise RetrievalError(f"Failed to connect to Ollama at {self.base_url}: {e}", original_error=e)
-        except RetrievalError:
-            raise
         except Exception as e:
             raise RetrievalError(f"An unexpected error occurred during embedding: {e}", original_error=e)
 
     def embed_query(self, text: str) -> List[float]:
         try:
             return self._get_embedding(text)
-        except RetrievalError:
-            raise
         except Exception as e:
             raise RetrievalError(f"Error embedding query: {e}", original_error=e)
 
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
         try:
             return [self._get_embedding(text) for text in texts]
-        except RetrievalError:
-            raise
         except Exception as e:
             raise RetrievalError(f"Error embedding documents: {e}", original_error=e)
 
@@ -81,8 +75,6 @@ class Retriever:
             embedding = self.embedder.embed_query(query)
             results = self.vs.store.similarity_search_by_vector(embedding, k=k, filter=filter)
             return [Document(page_content=d.page_content, metadata=d.metadata) for d in results]
-        except RetrievalError:
-            raise
         except Exception as e:
             raise RetrievalError(f"Failed to retrieve documents: {e}", original_error=e)
 
@@ -108,7 +100,5 @@ class Retriever:
         """
         try:
             return self.retrieve(query, k=k, filter={"source": source})
-        except RetrievalError:
-            raise
         except Exception as e:
             raise RetrievalError(f"Failed to retrieve documents by source: {e}", original_error=e)
