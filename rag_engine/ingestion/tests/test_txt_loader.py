@@ -1,5 +1,5 @@
 import unittest
-from rag_engine.ingestion.loaders import TXTLoader
+from ..loaders import TXTLoader
 import os
 
 class TestTXTLoader(unittest.TestCase):

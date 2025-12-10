@@ -1,5 +1,5 @@
 import unittest
-from rag_engine.ingestion.chunker import TextChunker
+from ..chunker import TextChunker
 from langchain_core.documents import Document
 
 class TestTextChunker(unittest.TestCase):
