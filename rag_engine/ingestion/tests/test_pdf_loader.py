@@ -4,7 +4,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
-from rag_engine.ingestion.loaders import PDFLoader
+from ..loaders import PDFLoader
 import os
 
 class TestPDFLoader(unittest.TestCase):

@@ -1,5 +1,5 @@
 import unittest
-from rag_engine.ingestion.loaders import CSVLoader
+from ..loaders import CSVLoader
 import csv
 import os
 
