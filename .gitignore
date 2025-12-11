@@ -6,6 +6,36 @@ __pycache__/
 # C extensions
 *.so
 
+# Miscellaneous test files
+
+# --- Standard Python & System ---
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+*.egg-info/
+dist/
+
+# --- Test Generated Directories (Screenshot 1) ---
+# Ignores all folders starting with test_ie_ and test_vs_
+test_ie_*/
+test_vs_*/
+
+# --- Test Generated Files (Screenshot 2 & 3) ---
+batch_test_*.txt
+search_test.txt
+test_doc.txt
+utils_test.txt
+valid_test.txt
+
+# --- Data Files (Screenshot 3) ---
+test_data.csv
+
+# --- Migration Script ---
+restructure.py
+
 # Distribution / packaging
 .Python
 build/
