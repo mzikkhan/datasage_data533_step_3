@@ -112,3 +112,57 @@ For questions or support, please open an issue on GitHub.
 ---
 
 **Made with ❤️ by the DataSage Team**
+
+```
+datasage_data533_step_3
+├─ .DS_Store
+├─ coverage.json
+├─ datasage_store
+│  └─ chroma.sqlite3
+├─ main.py
+├─ project_description.pdf
+├─ rag_engine
+│  ├─ .DS_Store
+│  ├─ indexing
+│  │  ├─ embedder.py
+│  │  ├─ indexing_documentation_updated.md
+│  │  ├─ index_engine.py
+│  │  ├─ testing_readme.md
+│  │  └─ vector_store.py
+│  ├─ ingestion
+│  │  ├─ chunker.py
+│  │  ├─ coverage_ingestion
+│  │  │  ├─ coveragehtml_ingestion.png
+│  │  │  └─ coverage_ingestion.png
+│  │  ├─ documentation.md
+│  │  ├─ loaders.py
+│  │  ├─ README.md
+│  │  └─ __init__.py
+│  ├─ retrieval
+│  │  ├─ data_models.py
+│  │  ├─ documentation.md
+│  │  ├─ generator.py
+│  │  ├─ README.md
+│  │  ├─ retriever.py
+│  │  └─ __init__.py
+│  ├─ tests
+│  │  ├─ coverage_report.png
+│  │  ├─ test_csv_loader.py
+│  │  ├─ test_data_models.py
+│  │  ├─ test_embedder.py
+│  │  ├─ test_generator.py
+│  │  ├─ test_index_engine.py
+│  │  ├─ test_pdf_loader.py
+│  │  ├─ test_retriever.py
+│  │  ├─ test_text_chunker.py
+│  │  ├─ test_txt_loader.py
+│  │  ├─ test_vector_store.py
+│  │  └─ __init__.py
+│  └─ __init__.py
+├─ readme.md
+├─ requirements.txt
+├─ search_test.txt
+├─ test_data.csv
+└─ utils_test.txt
+
+```
