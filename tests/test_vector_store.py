@@ -1,3 +1,21 @@
+import shutil
+import time
+import gc
+import os
+
+def robust_teardown(cls):
+    # Helper to forcefully clean up ChromaDB on Windows
+    if hasattr(cls, 'indexer'): del cls.indexer
+    if hasattr(cls, 'vector_store'): del cls.vector_store
+    gc.collect()
+    time.sleep(0.5)
+    if hasattr(cls, 'test_dir') and os.path.exists(cls.test_dir):
+        for i in range(3):
+            try:
+                shutil.rmtree(cls.test_dir)
+                break
+            except PermissionError:
+                time.sleep(1.0)
 """
 Unit tests for the VectorStore module.
 Tests document storage, retrieval, and analytics with error handling.
@@ -29,7 +47,7 @@ class TestVectorStoreInitialization(unittest.TestCase):
         cls.test_dir = "./test_vs_init"
     
     @classmethod
-    def tearDownClass(cls):
+    def tearDownClass_OLD(cls):
         """Clean up class-level resources."""
         print("=== Finished TestVectorStoreInitialization ===")
         del cls.embedder
@@ -90,7 +108,7 @@ class TestVectorStoreAddDocuments(unittest.TestCase):
         cls.test_dir = "./test_vs_add"
     
     @classmethod
-    def tearDownClass(cls):
+    def tearDownClass_OLD(cls):
         """Clean up class-level resources."""
         print("=== Finished TestVectorStoreAddDocuments ===")
         del cls.embedder
@@ -198,7 +216,7 @@ class TestVectorStoreSearch(unittest.TestCase):
         cls.vector_store.add_documents(test_docs)
     
     @classmethod
-    def tearDownClass(cls):
+    def tearDownClass_OLD(cls):
         """Clean up class-level resources."""
         print("=== Finished TestVectorStoreSearch ===")
         del cls.vector_store
@@ -300,7 +318,7 @@ class TestVectorStoreUtilities(unittest.TestCase):
         cls.vector_store.add_documents(test_docs)
     
     @classmethod
-    def tearDownClass(cls):
+    def tearDownClass_OLD(cls):
         """Clean up class-level resources."""
         print("=== Finished TestVectorStoreUtilities ===")
         del cls.vector_store
