@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "datasage-mds"
-version = "0.0.1"
+version = "0.0.2"
 description = "DATA 533 RAG Engine project with ingestion, indexing, retrieval, and CI"
 readme = "README.md"
 requires-python = ">=3.10"
