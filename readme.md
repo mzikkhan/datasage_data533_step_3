@@ -1,4 +1,5 @@
 # DataSage 🧙‍♂️
+PyPI: https://pypi.org/project/datasage-mds/
 
 A lightweight, modular Python package for building Retrieval-Augmented Generation (RAG) systems. DataSage enables you to query your documents using natural language by combining semantic search with large language models (LLMs).
 
@@ -23,25 +24,21 @@ DataSage
 
 ## 📋 Prerequisites
 
-- Python 3.8+
+- Python 3.10 or higher
 - [Ollama](https://ollama.com/download) (for local LLM inference)
 
 ## 🚀 Installation
 
-### 1. Clone the repository
+### 1. Install from PyPI (recommended)
+Package is published on PyPI:  
+https://pypi.org/project/datasage-mds/
 
 ```bash
-git clone https://github.com/mzikkhan/datasage.git
-cd datasage
-```
+pip install datasage-mds
 
-### 2. Install dependencies
 
-```bash
-pip install -r requirements.txt
-```
 
-### 3. Install Ollama
+### 2. Install Ollama
 
 Download and install Ollama from [ollama.com](https://ollama.com/download). 
 
@@ -158,8 +155,10 @@ datasage_data533_step_3
 │  │  ├─ test_txt_loader.py
 │  │  ├─ test_vector_store.py
 │  │  └─ __init__.py
+│  ├─ rag_engine.py  
 │  └─ __init__.py
-├─ readme.md
+├─ README.md
+├─ pyproject.toml
 ├─ requirements.txt
 ├─ search_test.txt
 ├─ test_data.csv
