@@ -23,7 +23,7 @@ DataSage
 
 ## 📋 Prerequisites
 
-- Python 3.8+
+- Python 3.10 or higher
 - [Ollama](https://ollama.com/download) (for local LLM inference)
 
 ## 🚀 Installation
@@ -158,8 +158,10 @@ datasage_data533_step_3
 │  │  ├─ test_txt_loader.py
 │  │  ├─ test_vector_store.py
 │  │  └─ __init__.py
+│  ├─ rag_engine.py  
 │  └─ __init__.py
-├─ readme.md
+├─ README.md
+├─ pyproject.toml
 ├─ requirements.txt
 ├─ search_test.txt
 ├─ test_data.csv
