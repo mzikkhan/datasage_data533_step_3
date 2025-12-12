@@ -1,21 +1,3 @@
-import shutil
-import time
-import gc
-import os
-
-def robust_teardown(cls):
-    # Helper to forcefully clean up ChromaDB on Windows
-    if hasattr(cls, 'indexer'): del cls.indexer
-    if hasattr(cls, 'vector_store'): del cls.vector_store
-    gc.collect()
-    time.sleep(0.5)
-    if hasattr(cls, 'test_dir') and os.path.exists(cls.test_dir):
-        for i in range(3):
-            try:
-                shutil.rmtree(cls.test_dir)
-                break
-            except PermissionError:
-                time.sleep(1.0)
 """
 Unit tests for the VectorStore module.
 Tests document storage, retrieval, and analytics with error handling.
@@ -47,14 +29,10 @@ class TestVectorStoreInitialization(unittest.TestCase):
         cls.test_dir = "./test_vs_init"
     
     @classmethod
-    def tearDownClass_OLD(cls):
+    def tearDownClass(cls):
         """Clean up class-level resources."""
         print("=== Finished TestVectorStoreInitialization ===")
         del cls.embedder
-        import time
-        time.sleep(0.1)  # Brief delay for file handles
-        import time
-        time.sleep(0.1)  # Brief delay for file handles
         if os.path.exists(cls.test_dir):
             shutil.rmtree(cls.test_dir)
     
@@ -108,14 +86,10 @@ class TestVectorStoreAddDocuments(unittest.TestCase):
         cls.test_dir = "./test_vs_add"
     
     @classmethod
-    def tearDownClass_OLD(cls):
+    def tearDownClass(cls):
         """Clean up class-level resources."""
         print("=== Finished TestVectorStoreAddDocuments ===")
         del cls.embedder
-        import time
-        time.sleep(0.1)  # Brief delay for file handles
-        import time
-        time.sleep(0.1)  # Brief delay for file handles
         if os.path.exists(cls.test_dir):
             shutil.rmtree(cls.test_dir)
     
@@ -178,11 +152,14 @@ class TestVectorStoreAddDocuments(unittest.TestCase):
         self.assertIn("content_length", metadata, "Should have content_length")
     
     def test_add_empty_document_list(self):
-       """Test adding empty document list (error handling)."""
-       docs = []
-       with self.assertRaises(ValueError) as context:
-           self.vector_store.add_documents(docs)
-       self.assertIn("non-empty", str(context.exception))
+        """Test adding empty document list (error handling)."""
+        docs = []
+        doc_ids = self.vector_store.add_documents(docs)
+        self.assertIsNotNone(doc_ids, "Should handle empty list")
+        self.assertEqual(len(doc_ids), 0, "Should return empty list")
+        self.assertEqual(self.vector_store._doc_count, 0,
+                        "Document count should remain 0")
+        self.assertIsInstance(doc_ids, list, "Should return list")
 
 
 class TestVectorStoreSearch(unittest.TestCase):
@@ -216,15 +193,11 @@ class TestVectorStoreSearch(unittest.TestCase):
         cls.vector_store.add_documents(test_docs)
     
     @classmethod
-    def tearDownClass_OLD(cls):
+    def tearDownClass(cls):
         """Clean up class-level resources."""
         print("=== Finished TestVectorStoreSearch ===")
         del cls.vector_store
         del cls.embedder
-        import time
-        time.sleep(0.1)  # Brief delay for file handles
-        import time
-        time.sleep(0.1)  # Brief delay for file handles
         if os.path.exists(cls.test_dir):
             shutil.rmtree(cls.test_dir)
     
@@ -318,15 +291,11 @@ class TestVectorStoreUtilities(unittest.TestCase):
         cls.vector_store.add_documents(test_docs)
     
     @classmethod
-    def tearDownClass_OLD(cls):
+    def tearDownClass(cls):
         """Clean up class-level resources."""
         print("=== Finished TestVectorStoreUtilities ===")
         del cls.vector_store
         del cls.embedder
-        import time
-        time.sleep(0.1)  # Brief delay for file handles
-        import time
-        time.sleep(0.1)  # Brief delay for file handles
         if os.path.exists(cls.test_dir):
             shutil.rmtree(cls.test_dir)
     
