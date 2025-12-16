@@ -1,6 +1,8 @@
 # DataSage 🧙‍♂️
 PyPI: https://pypi.org/project/datasage-mds/
 
+Video: https://youtu.be/mDjG_x7xhiY
+
 A lightweight, modular Python package for building Retrieval-Augmented Generation (RAG) systems. DataSage enables you to query your documents using natural language by combining semantic search with large language models (LLMs).
 
 ## 🌟 Features
